@@ -1,74 +1,68 @@
 package token
 
-type TokenType string
-
+// Token struct to represent a token with its type and literal.
 type Token struct {
-	Type    TokenType
-	Literal string
+	Type, Literal string
 }
 
+// Constants representing the types of tokens.
 const (
-	// OPERATORS
-	ASSIGN             = "="
-	PLUS               = "+"
-	MULTIPLY           = "*"
-	SUBTRACT           = "-"
-	DIVIDE             = "/"
-	MODULO             = "%"
+	ILLEGAL = "ILLEGAL"
+	EOF     = "EOF"
 
-	// COMPARISON OPERATORS
-	//Using a prefix like CMP_  to makes it easy to identify 
-	// these as comparison operators when using them, 
-	// keeping THE code organized and easy to maintain.
-	CMP_EQUAL              = "=="
-	CMP_NOTEQUAL           = "!="
-	CMP_GREATERTHAN        = ">"
-	CMP_LESSTHAN           = "<"
-	CMP_GREATERTHANOREQUAL = ">="
-	CMP_LESSTHANOREQUAL    = "<="
+	IDENTIFIER = "IDENTIFIER"
+	INT        = "INT"
+	STRING     = "STRING"
 
-	// LOGICAL OPERATORS
-	CMP_AND = "&&"
-	CMP_OR = "||"
-	CMP_NOT = "!"
+	// Operators token
+	ASSIGN  = "="
+	PLUS    = "+"
+	MINUS   = "-"
+	ASTERIK = "*"
+	SLASH   = "/"
 
-	// Assignment Operators
-	ASSIGN_ADD = "+="
-	ASSIGN_SUBTRACT = "-="
-	ASSIGN_MULTIPLY = "*="
-	ASSIGN_DIVIDE = "/="
-	ASSIGN_MODULO = "%="
+	// Comparisons token
+	LESS_THAN    = "<"
+	GREATER_THAN = ">"
+	EQUAL        = "=="
+	NOT          = "!"
+	NOT_EQUAL    = "!="
 
-	// Increment/Decrement Operators
-	INCREMENT = "++"
-	DECREMENT = "--"
+	COMMA      = ","
+	SEMI_COLON = ";"
+	COLON      = ":"
 
-	// PUNCTUATION/SPECIAL SYMBOLS
-	LPAREN    = "("
-	RPAREN    = ")"
-	LBRACE    = "{"
-	RBRACE    = "}"
-	LBRACKET  = "["
-	RBRACKET  = "]"
-	COMMA     = ","
-	SEMICOLON = ";"
-	COLON     = ":"
+	LEFT_PARENTHESIS  = "("
+	RIGHT_PARENTHESIS = ")"
+	LEFT_BRACE        = "{"
+	RIGHT_BRACE       = "}"
+	LEFT_BRACKET      = "["
+	RIGHT_BRACKET     = "]"
 
-	// KEYWORDS
-	KW_IF     = "if"
-	KW_ELSE   = "else"
-	KW_FOR    = "for"
-	KW_WHILE  = "while"
-	KW_RETURN = "return"
-	KW_FUNC   = "func"
-	KW_VAR    = "var"
-	KW_CONST  = "const"
-	KW_TRUE   = "true"
-	KW_FALSE  = "false"
-
-	// LITERALS
-	LIT_INT   = "int"
-	LIT_FLOAT = "float"
-	LIT_STRING = "string"
-	LIT_BOOL   = "bool"
+	FUNCTION = "FUNCTION"
+	VAR      = "VAR"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
+// Map keywords in the language to their respective token types.
+var keywords = map[string]string{
+	"func":   FUNCTION,
+	"var":    VAR,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
+}
+
+// Check if a given identifier is a keyword and return the corresponding type. Returns the IDENTIFIER type if not a keyword.
+func LookupIdentifier(identifier string) string {
+	tok, ok := keywords[identifier]
+	if ok {
+		return tok
+	}
+	return IDENTIFIER
+}
