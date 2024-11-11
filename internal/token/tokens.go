@@ -22,22 +22,22 @@ const (
 	SLASH   = "/"
 
 	// Comparisons token
-	LESS_THAN    = "<"
-	GREATER_THAN = ">"
-	EQUAL        = "=="
-	NOT          = "!"
-	NOT_EQUAL    = "!="
+	LESSTHAN    = "<"
+	GREATERTHAN = ">"
+	EQUAL       = "=="
+	NOT         = "!"
+	NOTEQUAL    = "!="
 
-	COMMA      = ","
-	SEMI_COLON = ";"
-	COLON      = ":"
+	COMMA     = ","
+	SEMICOLON = ";"
+	COLON     = ":"
 
-	LEFT_PARENTHESIS  = "("
-	RIGHT_PARENTHESIS = ")"
-	LEFT_BRACE        = "{"
-	RIGHT_BRACE       = "}"
-	LEFT_BRACKET      = "["
-	RIGHT_BRACKET     = "]"
+	LEFTPARENTHESIS  = "("
+	RIGHTPARENTHESIS = ")"
+	LEFTBRACE        = "{"
+	RIGHTBRACE       = "}"
+	LEFTBRACKET      = "["
+	RIGHTBRACKET     = "]"
 
 	FUNCTION = "FUNCTION"
 	VAR      = "VAR"
@@ -47,6 +47,7 @@ const (
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
 )
+
 // Map keywords in the language to their respective token types.
 var keywords = map[string]string{
 	"func":   FUNCTION,

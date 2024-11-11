@@ -8,7 +8,7 @@ linters:
     - errcheck
     - goconst
     - gofmt
-    - golint
+    - revive
     - staticcheck
 
 issues:
