@@ -1,0 +1,16 @@
+run:
+  timeout: 5m
+
+linters:
+  disable-all: true
+  enable:
+    - govet
+    - errcheck
+    - goconst
+    - gofmt
+    - golint
+    - staticcheck
+
+issues:
+  max-issues-per-linter: 10
+  max-same-issues: 3
