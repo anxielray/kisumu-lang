@@ -47,6 +47,7 @@ const (
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
 )
+
 // Map keywords in the language to their respective token types.
 var keywords = map[string]string{
 	"func":   FUNCTION,
