@@ -1,0 +1,68 @@
+name: KSM Dev CI/CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - alpha
+      - "beta/*"
+      - dev
+  push:
+    branches:
+      - alpha
+      - "beta/*"
+      - dev
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    name: Build and Test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Cache Go modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.mod', '**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Set up Go environment
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Lint code
+        uses: golangci/golangci-lint-action@v6.1.1
+        with:
+          args: "--timeout=5m"
+
+      - name: Run unit tests
+        run: |
+          go test -v ./... | tee tests.log
+        continue-on-error: true # Continue to report coverage even if tests fail
+
+      - name: Generate Coverage Report
+        run: |
+          go test -coverprofile=coverage.out ./...
+          go tool cover -func=coverage.out
+        continue-on-error: false # Fail the job if coverage generation fails
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage.out
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: tests.log
