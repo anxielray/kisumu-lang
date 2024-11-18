@@ -58,6 +58,20 @@ func (l *Lexer) readIdentifier() string {
 	return l.input[position:l.position]
 }
 
+// Will check if a character is a letter by either being an alphabet letter or an underscore
 func isLetter(char byte) bool {
 	return 'a' <= char && char <= 'z' || 'A' <= char && char <= 'Z' || char == '_'
+}
+
+// Will read a sequence of digit characters from the input and returns it a string
+func (l *Lexer) readNumber() string {
+	position := l.position
+	for isDigit(l.char) {
+		l.readCurrentCharacter()
+	}
+	return l.input[position:l.position]
+}
+
+func isDigit(ch byte) bool {
+	return '0' <= ch && ch <= '9'
 }
