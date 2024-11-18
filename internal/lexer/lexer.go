@@ -75,3 +75,10 @@ func (l *Lexer) readNumber() string {
 func isDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9'
 }
+
+// Will skip and ignore any occurrence of a tab, newline, carriage return and space character
+func (l *Lexer) skipWhiteSpace() {
+	for l.char == ' ' || l.char == '\t' || l.char == '\n' || l.char == '\r' {
+		l.readCurrentCharacter()
+	}
+}
