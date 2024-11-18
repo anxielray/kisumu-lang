@@ -1,5 +1,7 @@
 package lexer
 
+import "github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/internal/token"
+
 type Lexer struct {
 	input        string
 	position     int
@@ -39,4 +41,9 @@ func (l *Lexer) readString() string {
 		}
 	}
 	return l.input[position:l.position]
+}
+
+// Will create and return a new Token object using a token type and the character
+func newToken(tokenType string, char byte) token.Token {
+	return token.Token{Type: tokenType, Literal: string(char)}
 }
