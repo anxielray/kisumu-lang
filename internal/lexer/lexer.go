@@ -47,3 +47,17 @@ func (l *Lexer) readString() string {
 func newToken(tokenType string, char byte) token.Token {
 	return token.Token{Type: tokenType, Literal: string(char)}
 }
+
+// Will read characters from an input that form an identifier starting from the current position and returns the identifier as a string
+func (l *Lexer) readIdentifier() string {
+	position := l.position
+
+	for isLetter(l.char) {
+		l.readCurrentCharacter()
+	}
+	return l.input[position:l.position]
+}
+
+func isLetter(char byte) bool {
+	return 'a' <= char && char <= 'z' || 'A' <= char && char <= 'Z' || char == '_'
+}
