@@ -26,3 +26,17 @@ func (l *Lexer) readCurrentCharacter() {
 	l.position = l.readPosition
 	l.readPosition++
 }
+
+// Will read characters from the input until it encounters a double quote or a null character
+func (l *Lexer) readString() string {
+	position := l.position + 1
+
+	for {
+		l.readCurrentCharacter()
+
+		if l.char == '"' || l.char == 0 {
+			break
+		}
+	}
+	return l.input[position:l.position]
+}
