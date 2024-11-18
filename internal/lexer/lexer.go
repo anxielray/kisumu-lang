@@ -82,3 +82,12 @@ func (l *Lexer) skipWhiteSpace() {
 		l.readCurrentCharacter()
 	}
 }
+
+// Will check the next character in the input string without advancing the read position. 
+func (l *Lexer) peekNextCharacter() byte {
+	if l.readPosition >= len(l.input) {
+		return 0
+	} else {
+		return l.input[l.readPosition]
+	}
+}
