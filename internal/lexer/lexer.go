@@ -2,6 +2,12 @@ package lexer
 
 import "github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/internal/token"
 
+/*
+The Lexer's purpose in the language comes down to breaking down source code written as input to smaller understandable and easier to work with units referred as tokens through a process known as lexical analysis.
+
+Any source code written will be stripped down to tokens by the lexer and compared against the tokens defined on the language. Incase of a mismatch, a syntax error will likely be flagged.
+*/
+
 type Lexer struct {
 	input        string
 	position     int
