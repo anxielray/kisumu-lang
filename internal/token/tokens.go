@@ -15,11 +15,11 @@ const (
 	STRING     = "STRING"
 
 	// Operators token
-	ASSIGN  = "="
-	PLUS    = "+"
-	MINUS   = "-"
-	ASTERIK = "*"
-	SLASH   = "/"
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	ASTERISK = "*"
+	SLASH    = "/"
 
 	// Comparisons token
 	LESSTHAN    = "<"
