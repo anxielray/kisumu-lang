@@ -46,12 +46,18 @@ const (
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+	CONST    = "CONST"
+	TYPE     = "TYPE"
 )
 
 // Map keywords in the language to their respective token types.
 var keywords = map[string]string{
 	"func":   FUNCTION,
 	"var":    VAR,
+	"const":  CONST,
+	"int":    TYPE,
+	"string": TYPE,
+	"bool":   TYPE,
 	"true":   TRUE,
 	"false":  FALSE,
 	"if":     IF,
