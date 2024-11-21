@@ -38,12 +38,13 @@ func (l *Lexer) readCurrentCharacter() {
 // Will read characters from the input until it encounters a double quote or a null character
 func (l *Lexer) readString() string {
 	position := l.position + 1
-
 	for {
 		l.readCurrentCharacter()
-
-		if l.char == '"' || l.char == 0 {
+		if l.char == '"' {
 			break
+		}
+		if l.char == 0 { // Unclosed string
+			return l.input[position:l.position]
 		}
 	}
 	return l.input[position:l.position]
@@ -72,7 +73,11 @@ func isLetter(char byte) bool {
 // Will read a sequence of digit characters from the input and returns it a string
 func (l *Lexer) readNumber() string {
 	position := l.position
-	for isDigit(l.char) {
+	isFloat := false
+	for isDigit(l.char) || (l.char == '.' && !isFloat) {
+		if l.char == '.' {
+			isFloat = true
+		}
 		l.readCurrentCharacter()
 	}
 	return l.input[position:l.position]
