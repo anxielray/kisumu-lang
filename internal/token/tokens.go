@@ -10,10 +10,11 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	IDENTIFIER = "IDENTIFIER"
-	INT        = "INT"
-	STRING     = "STRING"
-	BOOL       = "BOOL"
+	IDENTIFIER         = "IDENTIFIER"
+	INT                = "INT"
+	STRING             = "STRING"
+	BOOL               = "BOOL"
+	UnterminatedString = "unterminated string"
 
 	// Operators token
 	ASSIGN   = "="

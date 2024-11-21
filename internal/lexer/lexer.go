@@ -14,13 +14,13 @@ Any source code written will be stripped down to tokens by the lexer and compare
 */
 
 // LexerConfig provides configuration options for the lexer
-type LexerConfig struct {
+type Config struct {
 	AllowComments    bool   // Toggle comment handling
 	StringDelimiters []byte // Allowed string delimiters, e.g., `"`, `'`
 }
 
 // DefaultLexerConfig defines default settings for the lexer
-var DefaultLexerConfig = LexerConfig{
+var DefaultConfig = Config{
 	AllowComments:    true,
 	StringDelimiters: []byte{'"'},
 }
@@ -33,11 +33,11 @@ type Lexer struct {
 	char         byte // Current character being processed
 	line         int  // Current line number
 	column       int  // Current column number
-	config       LexerConfig
+	config       Config
 }
 
 // New creates a new Lexer instance with the provided configuration
-func New(input string, config LexerConfig) *Lexer {
+func New(input string, config Config) *Lexer {
 	l := &Lexer{
 		input:  input,
 		config: config,
@@ -116,7 +116,7 @@ func (l *Lexer) readString() string {
 			break
 		}
 		if l.char == 0 {
-			return "unterminated string"
+			return token.UnterminatedString
 		}
 	}
 	return l.input[position:l.position]

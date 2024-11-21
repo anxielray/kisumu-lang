@@ -41,7 +41,7 @@ func TestNextToken(t *testing.T) {
 		{Type: token.EOF, Literal: ""},
 	}
 
-	l := lexer.New(input, lexer.DefaultLexerConfig)
+	l := lexer.New(input, lexer.DefaultConfig)
 
 	for i, expected := range expectedTokens {
 		tok := l.NextToken()
