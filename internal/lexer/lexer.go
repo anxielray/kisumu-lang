@@ -1,6 +1,11 @@
 package lexer
 
-import "github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/internal/token"
+import (
+	"fmt"
+	"unicode"
+
+	"github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/internal/token"
+)
 
 /*
 The Lexer's purpose in the language comes down to breaking down source code written as input to smaller understandable and easier to work with units referred as tokens through a process known as lexical analysis.
@@ -8,69 +13,125 @@ The Lexer's purpose in the language comes down to breaking down source code writ
 Any source code written will be stripped down to tokens by the lexer and compared against the tokens defined on the language. Incase of a mismatch, a syntax error will likely be flagged.
 */
 
-type Lexer struct {
-	input        string
-	position     int
-	readPosition int
-	char         byte
+// LexerConfig provides configuration options for the lexer
+type LexerConfig struct {
+	AllowComments    bool   // Toggle comment handling
+	StringDelimiters []byte // Allowed string delimiters, e.g., `"`, `'`
 }
 
-// Will be used to create a new Lexer instance
-func New(input string) *Lexer {
+// DefaultLexerConfig defines default settings for the lexer
+var DefaultLexerConfig = LexerConfig{
+	AllowComments:    true,
+	StringDelimiters: []byte{'"'},
+}
+
+// Lexer performs lexical analysis on the input source code
+type Lexer struct {
+	input        string
+	position     int  // Current position in the input
+	readPosition int  // Next position in the input
+	char         byte // Current character being processed
+	line         int  // Current line number
+	column       int  // Current column number
+	config       LexerConfig
+}
+
+// New creates a new Lexer instance with the provided configuration
+func New(input string, config LexerConfig) *Lexer {
 	l := &Lexer{
-		input: input,
+		input:  input,
+		config: config,
+		line:   1,
+		column: 0,
 	}
 	l.readCurrentCharacter()
 	return l
 }
 
-// Will read the current character in the input
+// readCurrentCharacter advances the lexer to the next character in the input
 func (l *Lexer) readCurrentCharacter() {
 	if l.readPosition >= len(l.input) {
-		l.char = 0
+		l.char = 0 // Null character to indicate EOF
 	} else {
 		l.char = l.input[l.readPosition]
 	}
 	l.position = l.readPosition
 	l.readPosition++
+	if l.char == '\n' {
+		l.line++
+		l.column = 0
+	} else {
+		l.column++
+	}
 }
 
-// Will read characters from the input until it encounters a double quote or a null character
+// peekNextCharacter returns the next character without advancing the position
+func (l *Lexer) peekNextCharacter() byte {
+	if l.readPosition >= len(l.input) {
+		return 0
+	}
+	return l.input[l.readPosition]
+}
+
+// skipWhiteSpace skips over whitespace and optionally comments
+func (l *Lexer) skipWhiteSpace() {
+	for unicode.IsSpace(rune(l.char)) {
+		l.readCurrentCharacter()
+	}
+
+	if l.config.AllowComments {
+		// Handle single-line comments
+		if l.char == '/' && l.peekNextCharacter() == '/' {
+			for l.char != '\n' && l.char != 0 {
+				l.readCurrentCharacter()
+			}
+			l.skipWhiteSpace() // Continue skipping whitespace
+		}
+
+		// Handle multi-line comments
+		if l.char == '/' && l.peekNextCharacter() == '*' {
+			l.readCurrentCharacter() // Consume '/'
+			l.readCurrentCharacter() // Consume '*'
+			for !(l.char == '*' && l.peekNextCharacter() == '/') && l.char != 0 {
+				l.readCurrentCharacter()
+			}
+			if l.char == '*' {
+				l.readCurrentCharacter() // Consume '*'
+				l.readCurrentCharacter() // Consume '/'
+			} else {
+				fmt.Printf("Unterminated comment at line %d, column %d\n", l.line, l.column)
+			}
+			l.skipWhiteSpace()
+		}
+	}
+}
+
+// readString reads a string literal, supporting multiple delimiters
 func (l *Lexer) readString() string {
+	startDelimiter := l.char
 	position := l.position + 1
 	for {
 		l.readCurrentCharacter()
-		if l.char == '"' {
+		if l.char == startDelimiter {
 			break
 		}
-		if l.char == 0 { // Unclosed string
-			return l.input[position:l.position]
+		if l.char == 0 {
+			return "unterminated string"
 		}
 	}
 	return l.input[position:l.position]
 }
 
-// Will create and return a new Token object using a token type and the character
-func newToken(tokenType string, char byte) token.Token {
-	return token.Token{Type: tokenType, Literal: string(char)}
-}
-
-// Will read characters from an input that form an identifier starting from the current position and returns the identifier as a string
+// readIdentifier reads an identifier or keyword
 func (l *Lexer) readIdentifier() string {
 	position := l.position
-
 	for isLetter(l.char) {
 		l.readCurrentCharacter()
 	}
 	return l.input[position:l.position]
 }
 
-// Will check if a character is a letter by either being an alphabet letter or an underscore
-func isLetter(char byte) bool {
-	return 'a' <= char && char <= 'z' || 'A' <= char && char <= 'Z' || char == '_'
-}
-
-// Will read a sequence of digit characters from the input and returns it a string
+// readNumber reads a number literal, supporting integers and floats
 func (l *Lexer) readNumber() string {
 	position := l.position
 	isFloat := false
@@ -83,88 +144,44 @@ func (l *Lexer) readNumber() string {
 	return l.input[position:l.position]
 }
 
-func isDigit(ch byte) bool {
-	return '0' <= ch && ch <= '9'
+// newToken creates a new token with the given type and literal
+func newToken(tokenType string, literal string) token.Token {
+	return token.Token{Type: tokenType, Literal: literal}
 }
 
-// Will skip and ignore any occurrence of a tab, newline, carriage return and space character
-func (l *Lexer) skipWhiteSpace() {
-	for l.char == ' ' || l.char == '\t' || l.char == '\n' || l.char == '\r' {
-		l.readCurrentCharacter()
-	}
-}
-
-// Will check the next character in the input string without advancing the read position.
-func (l *Lexer) peekNextCharacter() byte {
-	if l.readPosition >= len(l.input) {
-		return 0
-	}
-	return l.input[l.readPosition]
-}
-
-// Will read the next token from the input source
+// NextToken retrieves the next token from the input
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
 	l.skipWhiteSpace()
 
+	// Handle single-character tokens
+	if tokType, ok := singleCharTokens[l.char]; ok {
+		tok = newToken(tokType, string(l.char))
+		l.readCurrentCharacter()
+		return tok
+	}
+
 	switch l.char {
-	// Checks whether the next token is either EQUAL (==) or ASSIGN (=)
 	case '=':
-		if l.peekNextCharacter() == '=' {
-			ch := l.char
-			l.readCurrentCharacter()
-			literal := string(ch) + string(l.char)
-			tok = token.Token{Type: token.EQUAL, Literal: literal}
-		} else {
-			tok = newToken(token.ASSIGN, l.char)
-		}
-	case '+':
-		tok = newToken(token.PLUS, l.char)
-	case '-':
-		tok = newToken(token.MINUS, l.char)
-		// Checks whether the next token is either NOTEQUAL (!=) or NOT (!)
+		tok = l.matchTwoCharToken('=', token.ASSIGN, token.EQUAL)
 	case '!':
-		if l.peekNextCharacter() == '=' {
-			ch := l.char
-			l.readCurrentCharacter()
-			literal := string(ch) + string(l.char)
-			tok = token.Token{Type: token.NOTEQUAL, Literal: literal}
-		} else {
-			tok = newToken(token.NOT, l.char)
+		tok = l.matchTwoCharToken('=', token.NOT, token.NOTEQUAL)
+	case '"', '\'':
+		if contains(l.config.StringDelimiters, l.char) {
+			tok.Type = token.STRING
+			tok.Literal = l.readString()
+
+			// Check for unterminated string
+			if tok.Literal == "unterminated string" {
+				tok.Type = token.ILLEGAL
+				tok.Literal = "unterminated string"
+			}
+			return tok
 		}
-	case '*':
-		tok = newToken(token.ASTERISK, l.char)
-	case '/':
-		tok = newToken(token.SLASH, l.char)
-	case '<':
-		tok = newToken(token.LESSTHAN, l.char)
-	case '>':
-		tok = newToken(token.GREATERTHAN, l.char)
-	case ',':
-		tok = newToken(token.COMMA, l.char)
-	case ';':
-		tok = newToken(token.SEMICOLON, l.char)
-	case '(':
-		tok = newToken(token.LEFTPARENTHESIS, l.char)
-	case ')':
-		tok = newToken(token.RIGHTPARENTHESIS, l.char)
-	case '{':
-		tok = newToken(token.LEFTBRACE, l.char)
-	case '}':
-		tok = newToken(token.RIGHTBRACE, l.char)
-	case '"':
-		tok.Type = token.STRING
-		tok.Literal = l.readString()
-	case '[':
-		tok = newToken(token.LEFTBRACKET, l.char)
-	case ']':
-		tok = newToken(token.RIGHTBRACKET, l.char)
-	case ':':
-		tok = newToken(token.COLON, l.char)
 	case 0:
-		tok.Literal = ""
 		tok.Type = token.EOF
+		tok.Literal = ""
 	default:
 		if isLetter(l.char) {
 			tok.Literal = l.readIdentifier()
@@ -175,9 +192,58 @@ func (l *Lexer) NextToken() token.Token {
 			tok.Literal = l.readNumber()
 			return tok
 		} else {
-			tok = newToken(token.ILLEGAL, l.char)
+			tok = newToken(token.ILLEGAL, string(l.char))
 		}
 	}
+
 	l.readCurrentCharacter()
 	return tok
+}
+
+// matchTwoCharToken matches either a single-character or two-character token
+func (l *Lexer) matchTwoCharToken(nextChar byte, singleType, doubleType string) token.Token {
+	if l.peekNextCharacter() == nextChar {
+		current := l.char
+		l.readCurrentCharacter()
+		literal := string(current) + string(l.char)
+		return token.Token{Type: doubleType, Literal: literal}
+	}
+	return newToken(singleType, string(l.char))
+}
+
+// Utility functions
+func isLetter(char byte) bool {
+	return unicode.IsLetter(rune(char)) || char == '_'
+}
+
+func isDigit(char byte) bool {
+	return '0' <= char && char <= '9'
+}
+
+func contains(slice []byte, item byte) bool {
+	for _, b := range slice {
+		if b == item {
+			return true
+		}
+	}
+	return false
+}
+
+// singleCharTokens maps single-character tokens to their types
+var singleCharTokens = map[byte]string{
+	'+': token.PLUS,
+	'-': token.MINUS,
+	'*': token.ASTERISK,
+	'/': token.SLASH,
+	'<': token.LESSTHAN,
+	'>': token.GREATERTHAN,
+	',': token.COMMA,
+	';': token.SEMICOLON,
+	'(': token.LEFTPARENTHESIS,
+	')': token.RIGHTPARENTHESIS,
+	'{': token.LEFTBRACE,
+	'}': token.RIGHTBRACE,
+	'[': token.LEFTBRACKET,
+	']': token.RIGHTBRACKET,
+	':': token.COLON,
 }
