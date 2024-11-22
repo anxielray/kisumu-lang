@@ -15,8 +15,8 @@ Any source code written will be stripped down to tokens by the lexer and compare
 
 // LexerConfig provides configuration options for the lexer
 type Config struct {
-	AllowComments    bool   // Toggle comment handling
-	StringDelimiters []byte // Allowed string delimiters, e.g., `"`, `'`
+	AllowComments    bool
+	StringDelimiters []byte
 }
 
 // DefaultLexerConfig defines default settings for the lexer
@@ -28,11 +28,11 @@ var DefaultConfig = Config{
 // Lexer performs lexical analysis on the input source code
 type Lexer struct {
 	input        string
-	position     int  // Current position in the input
-	readPosition int  // Next position in the input
-	char         byte // Current character being processed
-	line         int  // Current line number
-	column       int  // Current column number
+	position     int
+	readPosition int
+	char         byte
+	line         int
+	column       int
 	config       Config
 }
 
@@ -51,7 +51,7 @@ func New(input string, config Config) *Lexer {
 // readCurrentCharacter advances the lexer to the next character in the input
 func (l *Lexer) readCurrentCharacter() {
 	if l.readPosition >= len(l.input) {
-		l.char = 0 // Null character to indicate EOF
+		l.char = 0
 	} else {
 		l.char = l.input[l.readPosition]
 	}
@@ -85,19 +85,19 @@ func (l *Lexer) skipWhiteSpace() {
 			for l.char != '\n' && l.char != 0 {
 				l.readCurrentCharacter()
 			}
-			l.skipWhiteSpace() // Continue skipping whitespace
+			l.skipWhiteSpace()
 		}
 
 		// Handle multi-line comments
 		if l.char == '/' && l.peekNextCharacter() == '*' {
-			l.readCurrentCharacter() // Consume '/'
-			l.readCurrentCharacter() // Consume '*'
+			l.readCurrentCharacter()
+			l.readCurrentCharacter()
 			for !(l.char == '*' && l.peekNextCharacter() == '/') && l.char != 0 {
 				l.readCurrentCharacter()
 			}
 			if l.char == '*' {
-				l.readCurrentCharacter() // Consume '*'
-				l.readCurrentCharacter() // Consume '/'
+				l.readCurrentCharacter()
+				l.readCurrentCharacter()
 			} else {
 				fmt.Printf("Unterminated comment at line %d, column %d\n", l.line, l.column)
 			}
