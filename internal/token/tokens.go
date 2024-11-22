@@ -10,9 +10,11 @@ const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
-	IDENTIFIER = "IDENTIFIER"
-	INT        = "INT"
-	STRING     = "STRING"
+	IDENTIFIER         = "IDENTIFIER"
+	INT                = "INT"
+	STRING             = "STRING"
+	BOOL               = "BOOL"
+	UnterminatedString = "unterminated string"
 
 	// Operators token
 	ASSIGN   = "="
@@ -40,18 +42,22 @@ const (
 	RIGHTBRACKET     = "]"
 
 	FUNCTION = "FUNCTION"
-	VAR      = "VAR"
 	TRUE     = "TRUE"
 	FALSE    = "FALSE"
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+	CONST    = "CONST"
+	TYPE     = "TYPE"
 )
 
 // Map keywords in the language to their respective token types.
 var keywords = map[string]string{
 	"func":   FUNCTION,
-	"var":    VAR,
+	"const":  CONST,
+	"int":    INT,
+	"string": STRING,
+	"bool":   BOOL,
 	"true":   TRUE,
 	"false":  FALSE,
 	"if":     IF,
