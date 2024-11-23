@@ -17,7 +17,7 @@ import (
 )
 
 // Start function reads a .ksm file, tokenizes its content using a lexer, and prints each token until the end of the file is reached.
-func Start(out io.Writer) {
+func Start(io.Writer) {
 	ksmFile, err := os.Open("./main.ksm")
 	if err != nil {
 		fmt.Printf("Failed to open source file: %s\n", err)
