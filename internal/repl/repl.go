@@ -9,34 +9,29 @@ package repl
 import (
 	"bufio"
 	"fmt"
-	"io"
 	"os"
 
 	"github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/internal/lexer"
 	"github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/internal/token"
 )
 
-// Start function reads a .ksm file, tokenizes its content using a lexer, and prints each token until the end of the file is reached.
-func Start(io.Writer) {
-	ksmFile, err := os.Open("./main.ksm")
-	if err != nil {
-		fmt.Printf("Failed to open source file: %s\n", err)
-		os.Exit(1)
-	}
-	defer ksmFile.Close()
+const PROMPT = ">> "
 
-	scanner := bufio.NewScanner(ksmFile)
+// Start launches the REPL for lexer testing.
+func Start() {
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Println("Welcome to the Kisumu Lang Lexer REPL!")
+	fmt.Println("Type your code below. Press Ctrl+C to exit.")
 
 	for {
-		scanned := scanner.Scan()
-		if !scanned {
-			return
+		fmt.Print(PROMPT)
+		if !scanner.Scan() {
+			break
 		}
-
 		line := scanner.Text()
 		l := lexer.New(line, lexer.DefaultConfig)
 
-		// Prints all the tokens the lexer gives out until we encounter EOF.
+		// Print tokens until EOF
 		for tok := l.NextToken(); tok.Type != token.EOF; tok = l.NextToken() {
 			fmt.Printf("%+v\n", tok)
 		}
