@@ -245,5 +245,4 @@ var singleCharTokens = map[byte]string{
 	'}': token.RIGHTBRACE,
 	'[': token.LEFTBRACKET,
 	']': token.RIGHTBRACKET,
-	':': token.COLON,
 }
