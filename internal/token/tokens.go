@@ -17,29 +17,28 @@ const (
 	UnterminatedString = "unterminated string"
 
 	// Operators token
-	ASSIGN   = "="
-	PLUS     = "+"
-	MINUS    = "-"
-	ASTERISK = "*"
-	SLASH    = "/"
+	ASSIGN   = "ASSIGN"
+	PLUS     = "PLUS"
+	MINUS    = "MINUS"
+	ASTERISK = "ASTERISK"
+	SLASH    = "SLASH"
 
 	// Comparisons token
-	LESSTHAN    = "<"
-	GREATERTHAN = ">"
-	EQUAL       = "=="
-	NOT         = "!"
-	NOTEQUAL    = "!="
+	LESSTHAN    = "LESSTHAN"
+	GREATERTHAN = "GREATERTHAN"
+	EQUAL       = "EQUAL"
+	NOT         = "NOT"
+	NOTEQUAL    = "NOTEQUAL"
 
-	COMMA     = ","
-	SEMICOLON = ";"
-	COLON     = ":"
+	COMMA     = "COMMA"
+	SEMICOLON = "SEMICOLON"
 
-	LEFTPARENTHESIS  = "("
-	RIGHTPARENTHESIS = ")"
-	LEFTBRACE        = "{"
-	RIGHTBRACE       = "}"
-	LEFTBRACKET      = "["
-	RIGHTBRACKET     = "]"
+	LEFTPARENTHESIS  = "LEFTPARENTHESIS"
+	RIGHTPARENTHESIS = "RIGHTPARENTHESIS"
+	LEFTBRACE        = "LEFTBRACE"
+	RIGHTBRACE       = "RIGHTBRACE"
+	LEFTBRACKET      = "LEFTBRACKET"
+	RIGHTBRACKET     = "RIGHTBRACKET"
 
 	FUNCTION = "FUNCTION"
 	TRUE     = "TRUE"
@@ -55,9 +54,9 @@ const (
 var keywords = map[string]string{
 	"func":   FUNCTION,
 	"const":  CONST,
-	"int":    INT,
-	"string": STRING,
-	"bool":   BOOL,
+	"int":    TYPE,
+	"string": TYPE,
+	"bool":   TYPE,
 	"true":   TRUE,
 	"false":  FALSE,
 	"if":     IF,
