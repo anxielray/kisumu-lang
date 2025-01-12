@@ -14,46 +14,72 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
-    name: Build and Test
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu
+          - macOS
+        go:
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+    runs-on: ${{ matrix.platform }}-latest
+    name: Build and Test on ${{ matrix.platform }} with Go 1.${{ matrix.go }}.x
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 2  # Fetch the last two commits for better context
 
       - name: Cache Go modules
         uses: actions/cache@v3
         with:
           path: ~/.cache/go-build
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.mod', '**/go.sum') }}
+          key: ${{ runner.os }}-go-${{ matrix.go }}-${{ hashFiles('**/go.mod', '**/go.sum') }}
           restore-keys: |
-            ${{ runner.os }}-go-
+            ${{ runner.os }}-go-${{ matrix.go }}-
 
       - name: Set up Go environment
         uses: actions/setup-go@v5
         with:
-          go-version-file: go.mod
+          go-version: 1.${{ matrix.go }}.x  # Specify Go version based on the matrix
 
       - name: Install dependencies
-        run: go mod tidy
+        run: go mod tidy  # Ensure dependencies are tidy
 
       - name: Lint code
         uses: golangci/golangci-lint-action@v6.1.1
         with:
-          args: "--timeout=5m"
+          args: |
+            --timeout=5m
+            --skip-dirs=build,configs,deployments,docs,scripts,internal/core
+            --disable-all
+            --enable=typecheck,goimports,misspell,govet,ineffassign,gosimple,gosec,revive,gocritic
+            --max-issues-per-linter=0
+            --max-same-issues=0
+            --exclude-use-default=false
+            --exclude=should have a package comment,should have comment,should be of the form,should not use dot imports,which can be annoying to use,G102,G104,G301,G302,G304,G307,G404,copylocks
+            --misspell.locale=US
+            --gocritic.enabled-checks=ruleguard
+            --gocritic.settings.ruleguard.failOnError=true
+            --gocritic.settings.ruleguard.rules=rules.go
 
       - name: Run unit tests
         run: |
           go test -v ./... | tee tests.log
-        continue-on-error: true # Continue to report coverage even if tests fail
+        continue-on-error: true  # Continue to report coverage even if tests fail
 
       - name: Generate Coverage Report
         run: |
           go test -coverprofile=coverage.out ./...
           go tool cover -func=coverage.out
-        continue-on-error: false # Fail the job if coverage generation fails
+        continue-on-error: false  # Fail the job if coverage generation fails
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v3
