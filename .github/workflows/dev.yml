@@ -56,19 +56,7 @@ jobs:
       - name: Lint code
         uses: golangci/golangci-lint-action@v6.1.1
         with:
-          args: |
-            --timeout=5m
-            --skip-dirs=build,configs,deployments,docs,scripts,internal/core
-            --disable-all
-            --enable=typecheck,goimports,misspell,govet,ineffassign,gosimple,gosec,revive,gocritic
-            --max-issues-per-linter=0
-            --max-same-issues=0
-            --exclude-use-default=false
-            --exclude=should have a package comment,should have comment,should be of the form,should not use dot imports,which can be annoying to use,G102,G104,G301,G302,G304,G307,G404,copylocks
-            --misspell.locale=US
-            --gocritic.enabled-checks=ruleguard
-            --gocritic.settings.ruleguard.failOnError=true
-            --gocritic.settings.ruleguard.rules=rules.go
+          args: "--timeout=5m"
 
       - name: Run unit tests
         run: |
