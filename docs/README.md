@@ -50,3 +50,11 @@ Join the growing Kisumu community:
 ### **License**
 This project is licensed under the BSD 3-Clause License. See the [LICENSE](/LICENSE) file for details.
 
+
+## :clap:  Supporters
+
+[![Stargazers repo roster for @Zone01-Kisumu-Open-Source-Projects/kisumu-lang](https://reporoster.com/stars/dark/Zone01-Kisumu-Open-Source-Projects/kisumu-lang)](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/stargazers)
+
+[![Forkers repo roster for @Zone01-Kisumu-Open-Source-Projects/kisumu-lang](https://reporoster.com/forks/dark/Zone01-Kisumu-Open-Source-Projects/kisumu-lang)](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/network/members)
+
+<p align="center"><a href="#"><img src="https://img.shields.io/badge/Back%20to%20top--lightgrey?style=social" alt="Back to top" height="20"/></a></p>
