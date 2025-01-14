@@ -1,9 +1,9 @@
 ## **Kisumu Programming Language**
 
-Welcome to **Kisumu**, a modern statically-typed programming language inspired by Python, Go, Rust, and Lua. Kisumu is designed for simplicity, performance, and scalability, making it an excellent choice for both beginner programmers and experienced developers building robust, efficient applications.
-
+Welcome to **Kisumu**, a modern statically-typed programming language inspired by Go, Rust, and Python. Kisumu is designed for simplicity, performance, and scalability, making it an excellent choice for both beginner programmers and experienced developers building robust, efficient applications.
 
 ### **Key Features**
+
 - **C-style Syntax**: Easy-to-read and familiar syntax for developers.
 - **Statically Typed**: Ensures type safety and performance.
 - **First-Class Concurrency**: Powerful models like goroutines, actors, and channels.
@@ -11,12 +11,14 @@ Welcome to **Kisumu**, a modern statically-typed programming language inspired b
 - **Garbage Collection**: Automatic memory management for safety and ease.
 - **Interoperability**: FFI support for integration with C, Go, and more.
 
-
 ### **Getting Started**
+
 #### **1. Install Kisumu**
+
 Installation instructions will be provided closer to the public release. Stay tuned for updates.
 
 #### **2. Write Your First Program**
+
 ```ksm
 fn main() {
     print("Hello, Kisumu!")
@@ -24,34 +26,38 @@ fn main() {
 ```
 
 #### **3. Explore the Documentation**
-Dive deeper into Kisumu's features and capabilities:
-- [Introduction](docs/introduction/overview.md)
-- [Design Philosophy](docs/introduction/vision.md)
-- [Quick Start Guide](docs/introduction/quick_start.md)
 
-#### **4. Try the Examples**
+Dive deeper into Kisumu's features and capabilities:
+
+- [Introduction](docs/README.md)
+- [Design Philosophy](docs/specs/architecture.md)
+- [Quick Start Guide](docs/development/setup.md)
+
+<!-- #### **4. Try the Examples**
+
 Explore working examples:
+
 - [Hello World](examples/hello_world.ksm)
 - [Concurrency](examples/concurrency_example.ksm)
-- [Modules](examples/modules_example.ksm)
-
+- [Modules](examples/modules_example.ksm) -->
 
 ### **Contributing to Kisumu**
-We welcome contributions to make Kisumu even better!  
-Learn how to get involved by reading our [Contribution Guidelines](CONTRIBUTING.md).
 
+We welcome contributions to make Kisumu even better!  
+Learn how to get involved by reading our [Contribution Guidelines](docs/development/contribution-guidelines.md).
 
 ### **Community and Feedback**
-Join the growing Kisumu community:  
-- Share feedback in [docs/community/feedback.md](docs/community/feedback.md).  
-- Check out our [FAQ](docs/community/faq.md) for common questions.
 
+Join the growing Kisumu community:
+
+- Share feedback in [docs/community/feedback.md](docs/community/communication.md).
+- Check out our [Code Of Conduct](docs/community/code-of-conduct.md).
 
 ### **License**
+
 This project is licensed under the BSD 3-Clause License. See the [LICENSE](/LICENSE) file for details.
 
-
-## :clap:  Supporters
+## :clap: Supporters
 
 [![Stargazers repo roster for @Zone01-Kisumu-Open-Source-Projects/kisumu-lang](https://reporoster.com/stars/dark/Zone01-Kisumu-Open-Source-Projects/kisumu-lang)](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/stargazers)
 
