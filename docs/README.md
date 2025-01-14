@@ -1,66 +1,69 @@
-## **Kisumu Programming Language**
+# Documentation Overview
 
-Welcome to **Kisumu**, a modern statically-typed programming language inspired by Go, Rust, and Python. Kisumu is designed for simplicity, performance, and scalability, making it an excellent choice for both beginner programmers and experienced developers building robust, efficient applications.
+Welcome to **Kisumu**, a modern statically-typed programming language inspired by Go, Python, and Rust. Kisumu is designed for simplicity, performance, and scalability, making it an excellent choice for both beginner programmers and experienced developers building robust, efficient applications.
 
-### **Key Features**
+## Purpose
 
-- **C-style Syntax**: Easy-to-read and familiar syntax for developers.
-- **Statically Typed**: Ensures type safety and performance.
-- **First-Class Concurrency**: Powerful models like goroutines, actors, and channels.
-- **Extensibility**: Modular structure with packages for scalable codebases.
-- **Garbage Collection**: Automatic memory management for safety and ease.
-- **Interoperability**: FFI support for integration with C, Go, and more.
+The purpose of this documentation is to provide:
 
-### **Getting Started**
+- A comprehensive understanding of Kisumu Lang's vision and design.
+- Technical insights into its architecture and implementation.
+- Guidance for contributing to and collaborating on the project.
 
-#### **1. Install Kisumu**
+## Structure
 
-Installation instructions will be provided closer to the public release. Stay tuned for updates.
+The documentation is organized as follows:
 
-#### **2. Write Your First Program**
+### 1.Specification
 
-```ksm
-fn main() {
-    print("Hello, Kisumu!")
-}
-```
+Documents the goals, vision, and technical roadmap of the language:
 
-#### **3. Explore the Documentation**
+- **[`introduction.md`](docs/specs/introduction.md)**: High-level goals and scope.
+- **[`architecture.md`](docs/specs/architecture.md)**: Language design principles and structure.
+- **[`features.md`](docs/specs/features.md)**: Overview of core features and innovations.
+- **[`roadmap.md`](docs/specs/roadmap.md)**: Development milestones and long-term plans.
 
-Dive deeper into Kisumu's features and capabilities:
+### 2. Development
 
-- [Introduction](specs/introduction.md)
-- [Design Philosophy](specs/architecture.md)
-- [Quick Start Guide](development/setup.md)
+Practical resources for setting up and contributing:
 
-<!-- #### **4. Try the Examples**
+- **[`setup.md`](docs/development/setup.md)**: Development environment setup instructions.
+- **[`contribution-guidelines.md`](docs/development/contribution-guidelines.md)**: Best practices for contributing.
+- **[`code-structure.md`](docs/development/code-structure.md)**: Explanation of the project’s file organization.
 
-Explore working examples:
+### 3. Technical
 
-- [Hello World](examples/hello_world.ksm)
-- [Concurrency](examples/concurrency_example.ksm)
-- [Modules](examples/modules_example.ksm) -->
+Detailed insights into the language’s inner workings:
 
-### **Contributing to Kisumu**
+- **[`lexer.md`](docs/technical/lexer.md)**: Tokenization process and lexer design.
+- **[`parser.md`](docs/technical/parser.md)**: Parsing and Abstract Syntax Tree (AST) construction.
+- **[`codegen.md`](docs/technical/codegen.md)**: Code generation and interpretation mechanisms.
+- **[`error-handling.md`](docs/technical/error-handling.md)**: Error propagation and handling strategies.
 
-We welcome contributions to make Kisumu even better!  
-Learn how to get involved by reading our [Contribution Guidelines](development/contribution-guidelines.md).
+### 4. Community
 
-### **Community and Feedback**
+Resources for fostering collaboration and inclusivity:
 
-Join the growing Kisumu community:
+- **[`governance.md`](docs/community/governance.md)**: Governance and decision-making process.
+- **[`code-of-conduct.md`](docs/community/code-of-conduct.md)**: Community standards and behavior expectations.
+- **[`communication.md`](docs/community/communication.md)**: Information on communication channels.
 
-- Share feedback in [community/feedback.md](community/communication.md).
-- Check out our [Code Of Conduct](community/code-of-conduct.md).
+### 5. FAQ
 
-### **License**
+- **[`faq.md`](docs/faq.md)**: Answers to common questions about Kisumu Lang.
 
-This project is licensed under the BSD 3-Clause License. See the [LICENSE](../docs/LICENSE) file for details.
+## How to Use This Documentation
 
-## :clap: Supporters
+To get started:
 
-[![Stargazers repo roster for @Zone01-Kisumu-Open-Source-Projects/kisumu-lang](https://reporoster.com/stars/dark/Zone01-Kisumu-Open-Source-Projects/kisumu-lang)](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/stargazers)
+1. Read the [`introduction.md`](docs/specs/introduction.md) for an overview of the project's goals and scope.
+2. Explore the [`setup.md`](docs/development/setup.md) document if you're interested in setting up your development environment.
+3. Dive into the [`architecture.md`](docs/specs/architecture.md) and [`features.md`](docs/specs/features.md) for technical insights into the language design.
 
-[![Forkers repo roster for @Zone01-Kisumu-Open-Source-Projects/kisumu-lang](https://reporoster.com/forks/dark/Zone01-Kisumu-Open-Source-Projects/kisumu-lang)](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/network/members)
+We encourage you to explore all sections to fully understand the language’s capabilities and vision. If you’re interested in contributing, the [`contribution-guidelines.md`](docs/development/contribution-guidelines.md) and [`code-structure.md`](docs/development/code-structure.md) documents will be your starting points.
 
-<p align="center"><a href="#"><img src="https://img.shields.io/badge/Back%20to%20top--lightgrey?style=social" alt="Back to top" height="20"/></a></p>
+## Feedback and Contributions
+
+Your feedback is invaluable! Feel free to suggest improvements, report issues, or contribute to the documentation.
+
+Thank you for your interest and support in Kisumu Lang!
