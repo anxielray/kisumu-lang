@@ -29,9 +29,9 @@ fn main() {
 
 Dive deeper into Kisumu's features and capabilities:
 
-- [Introduction](specs/introduction.md)
-- [Design Philosophy](specs/architecture.md)
-- [Quick Start Guide](development/setup.md)
+- [Introduction](docs/README.md)
+- [Design Philosophy](docs/specs/architecture.md)
+- [Quick Start Guide](docs/development/setup.md)
 
 <!-- #### **4. Try the Examples**
 
@@ -44,18 +44,18 @@ Explore working examples:
 ### **Contributing to Kisumu**
 
 We welcome contributions to make Kisumu even better!  
-Learn how to get involved by reading our [Contribution Guidelines](development/contribution-guidelines.md).
+Learn how to get involved by reading our [Contribution Guidelines](docs/development/contribution-guidelines.md).
 
 ### **Community and Feedback**
 
 Join the growing Kisumu community:
 
-- Share feedback in [community/feedback.md](community/communication.md).
-- Check out our [Code Of Conduct](community/code-of-conduct.md).
+- Share feedback in [docs/community/feedback.md](docs/community/communication.md).
+- Check out our [Code Of Conduct](docs/community/code-of-conduct.md).
 
 ### **License**
 
-This project is licensed under the BSD 3-Clause License. See the [LICENSE](../docs/LICENSE) file for details.
+This project is licensed under the BSD 3-Clause License. See the [LICENSE](/LICENSE) file for details.
 
 ## :clap: Supporters
 
