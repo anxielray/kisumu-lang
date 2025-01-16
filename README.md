@@ -1,5 +1,11 @@
 ## **Kisumu Programming Language**
 
+[![](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/actions/workflows/dev.yml/badge.svg?workflow:ci)](https://github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang/actions/workflows/dev.yml?query=workflow:ci "Builds")
+[![](https://img.shields.io/discord/322538954119184384.svg?logo=discord&logoColor=white&label=Discord&color=5865F2)](https://discord.gg/amrst3npC8 "Join the Discord chat at https://discord.gg/amrst3npC8")
+[![](https://img.shields.io/github/license/Zone01-Kisumu-Open-Source-Projects/kisumu-lang)](https://opensource.org/license/bsd-3-clause "License: BSD 3-Clause")
+[![](https://www.codetriage.com/zone01-kisumu-open-source-projects/kisumu-lang/badges/users.svg)](https://www.codetriage.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang "Help Contribute to Open Source")
+[![](https://pkg.go.dev/badge/github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang?status.svg)](https://pkg.go.dev/github.com/Zone01-Kisumu-Open-Source-Projects/kisumu-lang "GoDoc")
+
 Welcome to **Kisumu**, a modern statically-typed programming language inspired by Go, Rust, and Python. Kisumu is designed for simplicity, performance, and scalability, making it an excellent choice for both beginner programmers and experienced developers building robust, efficient applications.
 
 ### **Key Features**
