@@ -54,7 +54,7 @@ jobs:
         run: |
           gofmt -l . | tee fmt.log
           if [ -s fmt.log ]; then
-            echo "Code is not formatted. Please run 'gofmt -w .'"
+            echo "Code is not formatted. Please run 'gofmt -w -l -s .'"
             exit 1
           fi
 
@@ -106,3 +106,8 @@ jobs:
               repo: context.repo.repo,
               body: "🚨 CI/CD pipeline failed! Please check the logs."
             })
+      - name: Generate documentation
+        run: |
+          godoc -http=:6060 &
+          sleep 5
+          curl -s http://localhost:6060/pkg/ > docs.log
