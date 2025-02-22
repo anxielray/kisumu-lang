@@ -21,7 +21,7 @@ func TestNextToken(t *testing.T) {
 	`
 
 	expectedTokens := []token.Token{
-		{Type: token.INT, Literal: "int"},
+		{Type: token.TYPE, Literal: "int"},
 		{Type: token.IDENTIFIER, Literal: "age"},
 		{Type: token.ASSIGN, Literal: "="},
 		{Type: token.INT, Literal: "20"},
@@ -64,7 +64,7 @@ func TestLexerWithSampleFiles(t *testing.T) {
 		{
 			"token_tests.ksm",
 			[]token.Token{
-				{Type: token.INT, Literal: "int"},
+				{Type: token.TYPE, Literal: "int"},
 				{Type: token.IDENTIFIER, Literal: "x"},
 				{Type: token.ASSIGN, Literal: "="},
 				{Type: token.INT, Literal: "10"},
