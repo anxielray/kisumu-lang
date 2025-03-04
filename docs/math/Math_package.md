@@ -22,12 +22,12 @@
 
 ## Features
 
-- In this math package, a number of functions and implementations will be handled, some of which include; the _Absolute, Rounding off functions, trigonometry functions, basic floating point_ floaating point implementation, etc...
+In the math package, several functions and implementations are provided, including absolute value functions, precision functions, trigonometric functions, and basic floating-point operations.
 
 ### Constants
 
-- First and foremost we will start off with the constant.
-- A constant variable is a buffer storage that does not allow manipulation of it's initial value, commonly called immutable variables.
+- First, we will start with the constant.
+A constant variable is a buffer storage that does not allow manipulation of its initial value; it is commonly called an immutable variable.
 - Some fundamental mathematical constants that will be featured are;
 
   - [X] The Pi constant: $\pi \approx 3.1415926535 $
@@ -38,7 +38,7 @@
 
 ### Basic Math Operations
 
-- THe math package will handle the some basic math operations like addition, subtraction, division and multiplication amongst others.
+The math package will handle some basic math operations, such as addition, subtraction, division, and multiplication.
 - Examples;
 
   - add(a, b) → number
@@ -46,11 +46,11 @@
   - mul(a, b) → number
   - div(a, b) → number (Handle division by zero)
   - mod(a, b) → number.
-- The math package for kisumu language will feature some basic math operations.
+- The math package for the Kisumu language will feature some basic math operations.
 
 ### Power and Root functions
 
-- Some of the exponential functions that will be features in the ksm language will be:
+- Some of the exponential functions that the Ksm language will feature in the coming days include:
   - _Power function_ pow(base, exponent) → number
   - _Square of a number_ sqrt(x) → number
   - _Cube root of a number_ cbrt(x) → number (Cube root)
@@ -61,7 +61,7 @@
 
 ### Trigonometric Functions
 
-- Some of the functions that will be implemented in the trigonometric package includes:
+- Some functions that will feature in the trigonometric package include:
   - sin(x) → number $\sin{x}$
   - cos(x) → number $\cos{x}$
   - tan(x) → number $\tan{x}$
@@ -72,7 +72,7 @@
 
 ### Hyperbolic functions
 
-- Some of the functions for the trigonometry functions, the following hyperbolic functions will be included:
+- Some of the functions under the trigonometric functions are hyperbolic functions:
   - sinh(x) → number $\sinh{x}$
   - cosh(x) → number $\cosh{x}$
   - tanh(x) → number $\tanh{x}$
@@ -82,7 +82,7 @@
 
 ### Rounding and Precision
 
-- In this section the following implementation will be laid out:
+- In this section, the following will be laid out:
   - ceil(x) → number (Rounds up) $\lceil x \rceil$
   - floor(x) → number (Rounds down) $\lfloor x \rfloor$
   - round(x) → number (Nearest integer) $\R(x)$
@@ -120,5 +120,5 @@
 
 ## About
 
-- The functions above were suggested by [Raymond](https://martinraymondogwel.netlify.app)
-- Additional functions, if are, will be added in future.
+- The functions above were suggested by [Anxiel Raymond](https://martinraymondogwel.netlify.app)
+- More features and ideas are welcome.
