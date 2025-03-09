@@ -1,0 +1,6 @@
+package math
+
+fn Test_add(add: fn(x, y:int), args:[]..) {
+
+    
+}

@@ -1,0 +1,49 @@
+package math
+
+// the double dots will stand for any extension for the data types.
+
+// integer addition
+fn add(x, y: int..)-> (:int.., :error) {
+    if 
+    return (x+y);
+}
+
+fn subt(x, y:int..) -> :int.. {
+    // return the int difference of x from y
+    return y - x;
+}
+
+// method to truncate a float
+fn (fp *float..) (decimal_pls) -> :float.. {
+
+    let fp_1:float..
+    //capture the requied decimal places
+    required_dps := strcv.Extract_num(decimal_pls)
+
+    //convert the floating point to a string fro truncation
+    fp_str, err := strcv.Itos(fp, flaot..)
+    if err != nil {
+        i.println(err)
+    }
+
+    let mark:int
+    for (i-ch) range through fp_str { // another idea implementation of looping in kisumu lang
+        if (ch == '.') {
+            mark = i
+            break
+        }
+    }
+    fp_str = fp_str[:mark+(decimal_pls+1)]
+    
+}
+
+// float addition and returnn the final float in 2dp (rounded off)
+fn add_float(x, y:float..) -> :float.. {
+    sum := x+y
+    truncated_sum := sum.2f
+    return x+y;
+}
+
+fn subt_float(x, y:float..) -> :float.. {
+    return y - x;
+}
