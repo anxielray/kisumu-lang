@@ -1,0 +1,18 @@
+// in this file, let's define the functionalities that are gonna be used all over the project
+
+// function to check for the data types
+fn (any *..)Type -> :str {
+    if () {
+        return "TYPE:[STRING]"
+    } else if () {
+        return "TYPE:[STRING -> CONSTANT]
+    } else if (){
+        return "TYPE:[ERROR]"
+    } else if () {
+        return "TYPE:[INTEGER]
+    } else if () {
+        return "TYPE:[INTEGER -> CONSTANT]
+    } else {
+        return "TYPE:[NONE!]"
+    }
+}
