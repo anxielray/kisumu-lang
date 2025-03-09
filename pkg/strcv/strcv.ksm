@@ -1,0 +1,6 @@
+package strcv
+
+//function to convert a int number into a string
+fn Itoa()
+
+//function to convert a floating point number into a string
