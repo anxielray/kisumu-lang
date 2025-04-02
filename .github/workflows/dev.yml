@@ -20,6 +20,7 @@ jobs:
         platform:
           - ubuntu
           - macOS
+          - windows
         go:
           - 21
           - 22
@@ -31,7 +32,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # Fetch the last two commits for better context
+          fetch-depth: 2
 
       - name: Cache Go modules
         uses: actions/cache@v3
@@ -44,35 +45,69 @@ jobs:
       - name: Set up Go environment
         uses: actions/setup-go@v5
         with:
-          go-version: 1.${{ matrix.go }}.x  # Specify Go version based on the matrix
+          go-version: 1.${{ matrix.go }}.x
 
       - name: Install dependencies
-        run: go mod tidy  # Ensure dependencies are tidy
+        run: go mod tidy
+
+      - name: Check formatting
+        run: |
+          gofmt -l . | tee fmt.log
+          if [ -s fmt.log ]; then
+            echo "Code is not formatted. Please run 'gofmt -w -l -s .'"
+            exit 1
+          fi
 
       - name: Lint code
         uses: golangci/golangci-lint-action@v6.1.1
         with:
           args: "--timeout=5m"
 
+      - name: Run static analysis
+        run: |
+          go vet ./...
+          staticcheck ./...
+
+      - name: Build binaries
+        run: |
+          make build
+
       - name: Run unit tests
         run: |
           go test -v ./... | tee tests.log
-        continue-on-error: true  # Continue to report coverage even if tests fail
+        continue-on-error: true
 
       - name: Generate Coverage Report
         run: |
           go test -coverprofile=coverage.out ./...
           go tool cover -func=coverage.out
-        continue-on-error: false  # Fail the job if coverage generation fails
+        continue-on-error: false
 
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: coverage.out
 
       - name: Upload Test Results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: tests.log
+
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "🚨 CI/CD pipeline failed! Please check the logs."
+            })
+      - name: Generate documentation
+        run: |
+          godoc -http=:6060 &
+          sleep 5
+          curl -s http://localhost:6060/pkg/ > docs.log
