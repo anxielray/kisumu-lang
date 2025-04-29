@@ -1,0 +1,15 @@
+/// this is the implementation of the comparison function that will be used in testing functions
+
+fn EquateTo(testing_value: T.., function_return: fn(T..)) logger{
+    if function_return != testing_value {
+        KsmLogger("error", `[FAILED]: Test failed!
+        theory: {#}
+        experiment: {#}`, testing_value, function_return)
+    }else {
+        KsmLogger("[OK!]: Test case passed!")
+    }
+}
+
+fn KsmLogger(type: string, msg: string) {
+    //implement printing a message based on the type on the console
+}

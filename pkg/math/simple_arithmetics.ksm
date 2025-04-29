@@ -1,0 +1,43 @@
+/// implmentation of finding square of a number
+// nbr** = (the square of the number)
+
+/// implementation of finding the square root of a number
+/// the method can be applied to any type, of an integer or a float
+/// the return value can also be of any value either an integer or a float
+fn (value: T{int, float})Sqrt(resulting_type: string{"int", "float"}) T{int, float}{
+    // since the machine can give upto 15dps of accuracy;
+    for let i = 0 && i < value; considering i+=0.000000000000001 {
+        if i** == value {
+            if resulting_type == "float" {
+                return i.4sf
+            }elsif resulting_type == "int" { // safer to use else in this case
+                return i.int()
+            }
+        }
+    }
+    _ // since all the cases have been handled, then we can assume the return value
+}
+
+/// implementation of the sigma function
+/// the function is presented with a range of the variable to be added
+/// the default increament of the function is set to 1
+fn Sigma(from: int, to: int) int{
+    let answer = 0
+    for let i = from && i <= to; considering i+=1 {
+        answer += i
+    }
+    return answer
+}
+
+/// implementation of the capital Pi function
+/// the function is presented with a range of the variable to be multiplied
+/// the default increament of the function is set to 1
+fn Capital_Pi(from: int, to: int) int{
+    let answer = 0
+    for let i = from && i <= to; considering i+=1 {
+        answer *= i
+    }
+    return answer
+}
+
+/// 
