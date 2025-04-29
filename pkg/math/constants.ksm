@@ -1,0 +1,70 @@
+// Mathematical constants
+
+/// the pi constants
+/// The ratio of the ircumfrence of a circle to its diameter(the longest chord in any given circle)
+const PI float64 = 3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709
+
+// euler's number
+/// This is the base of the Natural logarithm
+const E float64 = 2.718281828459045
+
+/// golden ratio
+/// This is the ratio of; the line to the longest line segment in a line-ratio of 1:2
+const PHI float64 = 1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374
+
+/// square root of 2
+/// The first known irrational number
+/// The length of the diagonal of a unit square
+const SQRT_2 float64 = 1.4142135623730951
+
+/// square root of 3
+/// Used in relation of equilateral triangles
+const SQRT_3 float64 = 1.7320508075688772
+
+/// Catalans constant
+const CATALAN float64 = 0.915965594177219
+
+/// Avogadros number
+/// the number of particles in 1mol of a substance
+const AVOGADROS float64 = 6.02214076 * 10**23
+
+/// Boltzman constant
+/// The constant is the relationship of the average kinetic energy of particles
+/// in a gas to the temperature of the gas
+const BOLTZMAN float64 = 1.380649 * 10**(0-23)
+
+/// Plank's constant
+/// Relates the energy of a photon to its fequency
+const H float64 = 6.62607015 * 10** (0-34)
+
+/// gravitational constant
+/// the costant of proportionality in Newton's law of motion
+const G float64 = 9.81
+
+/// Euler's mascheroni constant
+const E_MASCHERONI float64 = 0.5772156649015329
+
+/// log2
+/// the natural logarithm
+const LOG2 float64 = 0.6931471805599453
+
+/// log10
+const LOG10 float64 = 2.302585092994046
+
+/// ================[TRIGONOMETRIC constants]=============
+
+/// sine 45 and cos 45
+const SIN_45 float64 = 0.7071067811865457
+const COS_45 float64 = 0.7071067811865457
+
+/// root 5
+const SQRT_5 float64 = 2.23606797749979
+
+/// Rydberg constant
+const RYDBERG float64 = 1.097373 * 10**7
+
+/// Earth's radius
+const EARTH_R float64 = 6.371 * 10**6
+
+/// Speed of light
+const C float64 = 299792458 // units; m/s
