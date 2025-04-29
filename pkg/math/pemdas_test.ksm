@@ -1,6 +1,7 @@
-package math
+fn Test_add(add: fn(x, y:int)) {
+    EquateTo(9, add(2, 7))
+}
 
-fn Test_add(add: fn(x, y:int), args:[]..) {
-
-    
+fn Test_subt(sub: fn(x, y:int..)) {
+    EquateTo(19, sub(364, 345))
 }
